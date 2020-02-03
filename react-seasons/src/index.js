@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import SeasonDisplay from "./SeasonDisplay";
 
 class App extends React.Component {
   state = { lat: null, errorMessage: "" };
@@ -18,11 +19,8 @@ class App extends React.Component {
     console.log("Component was updated");
   }
 
-
   //
-  componentWillUnmount(){
-
-  }
+  componentWillUnmount() {}
 
   //RETORNE SOMENTE JSX DAQUI.... EVITE REALIZAR OU RETORNAR OUTRAS COISAS
   render() {
@@ -30,7 +28,7 @@ class App extends React.Component {
       return <div>Msg. Erro : {this.state.errorMessage}</div>;
     }
     if (!this.state.errorMessage && this.state.lat) {
-      return <div>Latitude: {this.state.lat}</div>;
+      return <SeasonDisplay lat={this.state.lat} />;
     }
 
     return <div>"Carregando..."</div>;
