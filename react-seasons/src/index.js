@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import SeasonDisplay from "./SeasonDisplay";
+import ActivityLoader from "./ActivityLoader";
 
 class App extends React.Component {
   state = { lat: null, errorMessage: "" };
@@ -22,17 +23,19 @@ class App extends React.Component {
   //
   componentWillUnmount() {}
 
-  //RETORNE SOMENTE JSX DAQUI.... EVITE REALIZAR OU RETORNAR OUTRAS COISAS
-  render() {
+  renderComponent() {
     if (this.state.errorMessage && !this.state.lat) {
       return <div>Msg. Erro : {this.state.errorMessage}</div>;
     }
     if (!this.state.errorMessage && this.state.lat) {
       return <SeasonDisplay lat={this.state.lat} />;
     }
+    return <ActivityLoader msg="Permita sua localização..." />;
+  }
 
-    return <div>"Carregando..."</div>;
+  //RETORNE SOMENTE JSX DAQUI.... EVITE REALIZAR OU RETORNAR OUTRAS COISAS
+  render() {
+    return <div>{this.renderComponent()}</div>;
   }
 }
-
 ReactDOM.render(<App />, document.querySelector("#root"));
